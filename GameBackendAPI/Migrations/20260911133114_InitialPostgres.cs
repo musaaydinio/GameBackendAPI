@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace GameBackendAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialPostgres : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +17,11 @@ namespace GameBackendAPI.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Coins = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    Coins = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +32,11 @@ namespace GameBackendAPI.Migrations
                 name: "Weapons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Damage = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<int>(type: "integer", nullable: false),
+                    Damage = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,10 +47,10 @@ namespace GameBackendAPI.Migrations
                 name: "UserWeapons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    WeaponId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    WeaponId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,9 +74,20 @@ namespace GameBackendAPI.Migrations
                 columns: new[] { "Id", "Damage", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 22, "Pistol", 2000 },
-                    { 2, 25, "AK 47", 3000 },
-                    { 3, 50, "ShootGun", 4000 }
+                    { 1, 10, "Pistol", 500 },
+                    { 2, 22, "AK 47", 5000 },
+                    { 3, 45, "ShotGun", 4000 },
+                    { 4, 22, "M468", 5000 },
+                    { 5, 14, "UMP-45", 3000 },
+                    { 6, 20, "Buldog", 4500 },
+                    { 7, 25, "Revolver", 1500 },
+                    { 8, 40, "ShotCannon", 2500 },
+                    { 9, 12, "SMG", 1000 },
+                    { 10, 13, "MP9", 2500 },
+                    { 11, 18, "Revolver-Small", 1000 },
+                    { 12, 14, "AKS-74U", 3000 },
+                    { 13, 12, "MP7", 2750 },
+                    { 14, 50, "ShotGun-2", 4000 }
                 });
 
             migrationBuilder.CreateIndex(
