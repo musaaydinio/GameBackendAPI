@@ -62,7 +62,7 @@ namespace GameBackendAPI.Services
             {
                 UserName = request.UserName,
                 PasswordHash = passwordHash,
-                Coins = 1000
+                Coins = 3000
             };
 
             _context.Users.Add(user);
